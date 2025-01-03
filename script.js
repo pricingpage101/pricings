@@ -26,6 +26,26 @@ function updateCountdown() {
 
 const timerInterval = setInterval(updateCountdown, 1000);
 
+document.addEventListener('DOMContentLoaded', function() {
+    const testimonials = document.querySelectorAll('.testimonial');
+    
+    // Intersection Observer for fade-in effect
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    testimonials.forEach(testimonial => {
+        observer.observe(testimonial);
+    });
+});
+
 // User Agreement Handling
 const checkbox = document.getElementById('userAgreement');
 const buyButton = document.getElementById('premiumBuyButton');
